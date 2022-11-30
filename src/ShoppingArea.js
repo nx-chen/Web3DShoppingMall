@@ -4,8 +4,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import Stats from 'three/examples/jsm/libs/stats.module'
 
 class ShoppingArea extends Component {
 
