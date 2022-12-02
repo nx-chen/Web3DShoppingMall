@@ -1,8 +1,53 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import ProductItemCard from './ProductItemCard';
-import ShoppingAreaTest from './ShoppingAreaTest';
-import './ShoppingMall.css';
+import DisplayArea from './DisplayArea';
+import './style/ShoppingMall.css';
 
+const ShoppingMall = () => {
+
+    const products = [
+        { name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
+        { name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
+        { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v2.glb" },
+        { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v1.glb" },
+
+        { name: "victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+    ];
+
+    const [productSelected, setProductSelected] = useState(products[0]);
+    const [pageActual, setPageActual] = useState(0);
+    const [pageMax, setPageMax] = useState(0);
+
+    useEffect(() => {
+        
+    }, [])
+
+    const changeSelectedProduct = (product) => {
+        console.log(product)
+        setProductSelected(product)
+
+    };
+
+
+    return (
+        <div id="ShoppingMall">
+            <div id="list-products">
+                <div id="list-title">
+                    <p>Our Products</p>
+                </div>
+                <div id="list-products-body">
+                    {products.map((prod, i) => (
+                        <ProductItemCard key={i} canvasId={i} product={prod} onClick={changeSelectedProduct} />
+                    ))}
+                </div>
+
+            </div>
+
+        </div>
+    );
+}
+export default ShoppingMall;
+/*
 class ShoppingMall extends Component {
 
     state = {
@@ -66,7 +111,7 @@ class ShoppingMall extends Component {
                     </div>
                     <div id="list-products-body">
                         {this.state.products.map((prod, i) => (
-                            <ProductItemCard key={i} product={prod} onClick = {this.changeSelectedProduct}/>
+                            <ProductItemCard key={i} canvasId={i} product={prod} onClick = {this.changeSelectedProduct}/>
                         ))}
                     </div>
                 </div>
@@ -76,7 +121,7 @@ class ShoppingMall extends Component {
                     </div>
 
                 </div>
-                <ShoppingAreaTest productSrc={this.state.productSelected ? this.state.productSelected.assetPath :"Assets/Meubles/antique_dresser_blue.glb"}/>
+                
             </div>
         );
     }
@@ -84,3 +129,4 @@ class ShoppingMall extends Component {
 
 export default ShoppingMall;
 
+*/

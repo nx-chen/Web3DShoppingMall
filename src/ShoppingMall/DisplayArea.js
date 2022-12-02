@@ -1,10 +1,115 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Component } from 'react';
+import { useEffect, useRef, useState } from "react";
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-class ShoppingAreaTest extends Component {
+const DisplayArea = ({ product }) => {
+
+    const mountRef = useRef(null);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        precision: "highp",
+        alpha: true,
+        premultipliedAlpha: false,
+        stencil: false,
+        preserveDrawingBuffer: true,
+        maxLights: 1
+    });
+    const control = new OrbitControls(camera, renderer.domElement);
+
+    useEffect(() => {
+        init();
+        let onWindowResize = function () {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+        }
+
+        window.addEventListener("resize", onWindowResize, false);
+
+
+        return () => mountRef.current.removeChild(renderer.domElement);
+    }, []);
+
+
+    const init = () => {
+
+        camera.position.x = 2;
+        camera.position.z = 3;
+        camera.position.y = 3;
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+        mountRef.current.appendChild(renderer.domElement);
+
+
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+
+        ambientLight.castShadow = true;
+        scene.add(ambientLight);
+
+        setMeuble(product.assetPath);
+        animate();
+
+    }
+
+    const setMeuble = (meublePath) => {
+        return new Promise((resolve, reject) => {
+            const loader = new GLTFLoader()
+            loader.load(
+                meublePath,
+                (gltf) => {
+                    console.log(gltf)
+                /*    switch (product.name) {
+                        case "Antique dresser green":
+                            gltf.scene.scale.set(0.2,0.2,0.2);
+                            break;
+                        case "Grand classic Edwardian Dining Armchair":
+                            gltf.scene.scale.set(200,200,200);
+                            gltf.scene.position.y = -2;
+                            gltf.scene.position.x = -1;
+                            break;
+                        default:
+                            break;
+                    }
+                    */
+                    scene.add(gltf.scene)
+
+                },
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+        })
+    }
+
+    const animate = () => {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+
+        control.update()
+    }
+
+
+    return (
+        <div ref={mountRef}>
+
+        </div>
+    );
+}
+export default DisplayArea;
+/*
+class ShoppingArea extends Component {
 
     state = {
         productSrc: "Assets/Meubles/antique_dresser_blue.glb"
@@ -21,6 +126,7 @@ class ShoppingAreaTest extends Component {
         if (this.props.productSrc !== prevProps.productSrc) {
             this.setState({ productSrc: this.props.productSrc });
             console.log("coucou",this.state.productSrc);
+
         }
 
     }
@@ -74,21 +180,7 @@ class ShoppingAreaTest extends Component {
                 meublePath,
                 (gltf) => {
                     console.log(gltf)
-                    /*
-                    gltf.scene.traverse(function (child) {
-                        if (child.isMesh) {
-                            const m = child
-                            m.receiveShadow = true
-                            m.castShadow = true
-                        }
-                        if (child.isLight) {
-                            const l = child
-                            l.castShadow = true
-                            l.shadow.bias = -0.003
-                            l.shadow.mapSize.width = 2048
-                            l.shadow.mapSize.height = 2048
-                        }
-                    })*/
+             
                     this.model = gltf.scene;
                     this.scene.add(this.model);
                     resolve(this.modelReady = true);
@@ -104,7 +196,6 @@ class ShoppingAreaTest extends Component {
     }
 
     createFloor = () => {
-        
         const floorMat = new THREE.MeshStandardMaterial({
             roughness: 0.8,
             color: 0xfefee7,
@@ -142,4 +233,5 @@ class ShoppingAreaTest extends Component {
 }
 //   ReactDOM.render(<Scene />, document.getElementById('canvas'))
 
-export default ShoppingAreaTest;
+export default ShoppingArea;
+*/

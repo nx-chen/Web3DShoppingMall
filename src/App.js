@@ -1,5 +1,5 @@
 import './App.css';
-import ShoppingArea from './ShoppingMall/ShoppingArea';
+import DisplayArea from './ShoppingMall/DisplayArea';
 import ShoppingMall from './ShoppingMall/ShoppingMall';
 
 function App() {
