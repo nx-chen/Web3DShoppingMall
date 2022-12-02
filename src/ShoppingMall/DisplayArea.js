@@ -3,13 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import './style/ProductItemCard.css';
+import ClipLoader from "react-spinners/ClipLoader";
 
-const DisplayArea = ({ product }) => {
-
+const DisplayArea = ({ product, changeStatus }) => {
+    const [isLoading, setIsLoading] = useState(true);
     const mountRef = useRef(null);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100000);
     const renderer = new THREE.WebGLRenderer({
         antialias: true,
         precision: "highp",
@@ -17,40 +19,46 @@ const DisplayArea = ({ product }) => {
         premultipliedAlpha: false,
         stencil: false,
         preserveDrawingBuffer: true,
-        maxLights: 1
+        maxLights: 2
     });
     const control = new OrbitControls(camera, renderer.domElement);
+
 
     useEffect(() => {
         init();
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+            renderer.setSize(window.innerWidth / 3, window.innerHeight / 3);
         }
 
         window.addEventListener("resize", onWindowResize, false);
 
 
-        return () => mountRef.current.removeChild(renderer.domElement);
+        return () => mountRef.current?.removeChild(renderer.domElement);
     }, []);
 
 
     const init = () => {
 
         camera.position.x = 2;
-        camera.position.z = 3;
-        camera.position.y = 3;
+        camera.position.z = 4;
+        camera.position.y = 2;
+        camera.lookAt({
+            x : 0,
+            y : 0,
+            z : 0
+        });
+   
 
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+        renderer.setSize(window.innerWidth / 4, window.innerHeight / 4);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
 
         mountRef.current.appendChild(renderer.domElement);
 
-
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
 
         ambientLight.castShadow = true;
         scene.add(ambientLight);
@@ -66,28 +74,16 @@ const DisplayArea = ({ product }) => {
             loader.load(
                 meublePath,
                 (gltf) => {
-                    console.log(gltf)
-                /*    switch (product.name) {
-                        case "Antique dresser green":
-                            gltf.scene.scale.set(0.2,0.2,0.2);
-                            break;
-                        case "Grand classic Edwardian Dining Armchair":
-                            gltf.scene.scale.set(200,200,200);
-                            gltf.scene.position.y = -2;
-                            gltf.scene.position.x = -1;
-                            break;
-                        default:
-                            break;
-                    }
-                    */
-                    scene.add(gltf.scene)
-
+                    console.log(gltf);
+                    gltf.scene.scale.set(1.3,1.3,1.3);
+                    scene.add(gltf.scene);
+                    resolve(setIsLoading(false));
                 },
                 (xhr) => {
-                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
                 },
                 (error) => {
-                    console.log(error)
+                    console.log(error);
                 }
             )
         })
@@ -102,9 +98,21 @@ const DisplayArea = ({ product }) => {
 
 
     return (
-        <div ref={mountRef}>
+        <>
+        
+            <div className={!isLoading ? "showMe" : "hideMe"}>
+                <div ref={mountRef}>
+                </div>
+            </div>
 
-        </div>
+            <ClipLoader
+                color={"#EEEEEE"}
+                loading={isLoading}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+        </>
     );
 }
 export default DisplayArea;

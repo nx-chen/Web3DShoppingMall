@@ -8,8 +8,8 @@ const ShoppingMall = () => {
     const products = [
         { name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
         { name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
-        { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v2.glb" },
-        { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v1.glb" },
+        { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
+        { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
 
         { name: "victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
     ];
@@ -18,14 +18,32 @@ const ShoppingMall = () => {
     const [pageActual, setPageActual] = useState(0);
     const [pageMax, setPageMax] = useState(0);
 
+
     useEffect(() => {
-        
+        console.log("we are at page:", pageActual);
+    }, [pageActual])
+
+    useEffect(() => {
+        let temp = parseInt(products.length / 3) - 1;
+        setPageMax(products.length % 3 === 0 ? temp : temp + 1);
+        console.log("coucou");
     }, [])
 
     const changeSelectedProduct = (product) => {
         console.log(product)
         setProductSelected(product)
 
+    };
+
+    function PreviousPage() {
+        let previousPage = pageActual - 1 ;
+        setPageActual(previousPage < 0 ? pageMax : previousPage);
+        console.log(previousPage);
+    };
+
+    function NextPage() {
+        let nextPage = pageActual + 1;
+        setPageActual(nextPage > pageMax ? 0 : nextPage);
     };
 
 
@@ -36,11 +54,21 @@ const ShoppingMall = () => {
                     <p>Our Products</p>
                 </div>
                 <div id="list-products-body">
-                    {products.map((prod, i) => (
-                        <ProductItemCard key={i} canvasId={i} product={prod} onClick={changeSelectedProduct} />
-                    ))}
-                </div>
+                    {products.map((prod, i) => {
+                        return parseInt(i / 3) === pageActual ?
+                            <ProductItemCard key={i} canvasId={i} product={prod} pageActual={pageActual} onClick={changeSelectedProduct} />
+                            : null
 
+                    })
+                    }
+                </div>
+                <button id="btnNextPage" onClick={NextPage} className="btnPagination">
+                    <img src='Assets/Images/fleche-right.png' alt='Assets/Images/fleche-right.png' />
+                </button>
+
+                <button id="btnPreviousPage" onClick={PreviousPage} className="btnPagination">
+                    <img src='Assets/Images/fleche-left.png' alt='Assets/Images/fleche-left.png' />
+                </button>
             </div>
 
         </div>
