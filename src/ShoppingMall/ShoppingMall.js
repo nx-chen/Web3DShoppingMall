@@ -14,6 +14,7 @@ const ShoppingMall = () => {
         { name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb" },
         { name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb" },
         //tables
+        { name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb" },
         { name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
         { name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
         //sofas chaises
@@ -22,6 +23,8 @@ const ShoppingMall = () => {
         { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
         { name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
         //autres
+        { name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb" },
+        { name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb" },
         { name: "Retro piano", assetPath: "Assets/Meubles/retro-piano.glb" },
         { name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
         { name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
