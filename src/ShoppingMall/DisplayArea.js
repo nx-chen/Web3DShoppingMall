@@ -42,14 +42,8 @@ const DisplayArea = ({ product, changeStatus }) => {
     const init = () => {
 
         camera.position.x = 2;
-        camera.position.z = 4;
-        camera.position.y = 2;
-        camera.lookAt({
-            x : 0,
-            y : 0,
-            z : 0
-        });
-   
+        camera.position.z = 3;
+        camera.position.y = 3;
 
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth / 4, window.innerHeight / 4);
@@ -75,7 +69,6 @@ const DisplayArea = ({ product, changeStatus }) => {
                 meublePath,
                 (gltf) => {
                     console.log(gltf);
-                    gltf.scene.scale.set(1.3,1.3,1.3);
                     scene.add(gltf.scene);
                     resolve(setIsLoading(false));
                 },
