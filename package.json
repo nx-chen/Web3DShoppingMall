@@ -9,6 +9,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "react-show-more-list": "^0.5.2",
     "react-spinners": "^0.13.6",
     "three": "^0.133.1",
     "typeface-roboto": "^1.1.13",
