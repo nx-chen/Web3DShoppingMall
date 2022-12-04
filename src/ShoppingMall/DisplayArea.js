@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import './style/ProductItemCard.css';
 import ClipLoader from "react-spinners/ClipLoader";
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 const DisplayArea = ({ product, changeStatus }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -13,13 +14,8 @@ const DisplayArea = ({ product, changeStatus }) => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100000);
     const renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        precision: "highp",
-        alpha: true,
-        premultipliedAlpha: false,
-        stencil: false,
-        preserveDrawingBuffer: true,
-        maxLights: 2
+        antialias: true
+    
     });
     const control = new OrbitControls(camera, renderer.domElement);
 
@@ -49,6 +45,9 @@ const DisplayArea = ({ product, changeStatus }) => {
         renderer.setSize(window.innerWidth / 4, window.innerHeight / 4);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
+        const environment = new RoomEnvironment();
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
 
         mountRef.current.appendChild(renderer.domElement);
 
@@ -56,6 +55,9 @@ const DisplayArea = ({ product, changeStatus }) => {
 
         ambientLight.castShadow = true;
         scene.add(ambientLight);
+
+        scene.background = new THREE.Color(0xffffff);
+        scene.environment = pmremGenerator.fromScene(environment).texture;
 
         setMeuble(product.assetPath);
         animate();
@@ -92,7 +94,7 @@ const DisplayArea = ({ product, changeStatus }) => {
 
     return (
         <>
-        
+
             <div className={!isLoading ? "showMe" : "hideMe"}>
                 <div ref={mountRef}>
                 </div>

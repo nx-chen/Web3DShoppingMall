@@ -6,18 +6,26 @@ import './style/ShoppingMall.css';
 const ShoppingMall = () => {
 
     const products = [
+
+
+        //armoires
         { name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
         { name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
+        { name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb" },
+        { name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb" },
+        //tables
+        { name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
+        { name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+        //sofas chaises
+        { name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb" },
         { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
         { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
+        { name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
+        //autres
+        { name: "Retro piano", assetPath: "Assets/Meubles/retro-piano.glb" },
+        { name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
+        { name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
 
-        { name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
-        { name: "Old Piano", assetPath: "Assets/Meubles/dusty_old_piano.glb" },
-        { name: "Canopy bed", assetPath: "Assets/Meubles/four-poster_canopy_bed.glb" },
-        { name: "Old Record Player", assetPath: "Assets/Meubles/old_recordplayer.glb" },
-        { name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
-        { name: "Floor Globe", assetPath: "Assets/Meubles/floor_globe.glb" },
-    
     ];
 
     const [productSelected, setProductSelected] = useState(products[0]);
@@ -42,7 +50,7 @@ const ShoppingMall = () => {
     };
 
     function PreviousPage() {
-        let previousPage = pageActual - 1 ;
+        let previousPage = pageActual - 1;
         setPageActual(previousPage < 0 ? pageMax : previousPage);
         console.log(previousPage);
     };
