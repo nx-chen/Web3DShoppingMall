@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style/ProductItemCard.css';
-import * as THREE from 'three';
 import DisplayArea from './DisplayArea';
 
-class ProductItemCard extends React.Component {
-  
-    handleClick() {
-        this.props.onClick(this.props.product)
+const ProductItemCard = ({ canvasId, product, pageActual, onClick }) => {
+
+    const handleClick = () => {
+        onClick(product)
     }
 
-
-    render() {
-        return (
-            <div id='product-item' onClick={() => { this.handleClick() }}>
-                <div id="img-body">
-                   <DisplayArea product={this.props.product} />
-                </div>
-                <span>{this.props.product.name}</span>
+    return (
+        <div id='product-item' onClick={handleClick} >
+            <div id="img-body">
+                <DisplayArea product={product} canvasId={"canvas"+canvasId} sourceId={"source"+canvasId}/>
             </div>
-        );
-    }
+            <span>{product.name}</span>
+        </div>
+    );
 };
 export default ProductItemCard;
