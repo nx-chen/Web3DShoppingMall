@@ -61,6 +61,7 @@ const ViewerPage = () => {
 
     // to remove srolling
     document.body.style.overflow = "hidden";
+    let lastTime = new Date().getTime();
 
     useEffect(() => {
 
@@ -78,8 +79,6 @@ const ViewerPage = () => {
 
         renderer.setSize( window.innerWidth* 0.75, window.innerHeight * 0.9 );
         renderer.setPixelRatio( window.devicePixelRatio );
-        /*renderer.toneMapping = THREE.ACESFilmicToneMapping;
-		renderer.toneMappingExposure = 1;*/
 		renderer.outputEncoding = THREE.sRGBEncoding;
 		renderer.shadowMap.enabled = true;
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -124,7 +123,7 @@ const ViewerPage = () => {
 
         //shadow
 
-        const ground = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+        const ground = new THREE.Mesh( new THREE.PlaneGeometry( 8, 8 ), new THREE.MeshPhongMaterial( { color: 0xbfe3dd, depthWrite: false } ) );
 		ground.rotation.x = - Math.PI / 2;
 
 		camera.position.x = 1;
@@ -134,21 +133,15 @@ const ViewerPage = () => {
 
 		ground.receiveShadow = true;
 		scene.add( ground );
-/*
-        const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
-		hemiLight.position.set( 0, 100, 0 );
-		scene.add( hemiLight );
-*/
-        const dirLight = new THREE.DirectionalLight( 0xffffff );
-		dirLight.position.set( - 0, 40, 50 );
+
+        const dirLight = new THREE.DirectionalLight( 0xbfe3dd, 2.58 );
+		dirLight.position.set( -10, 20, 50 );
 		dirLight.castShadow = true;
-		dirLight.shadow.camera.top = 50;
-		dirLight.shadow.camera.bottom = - 25;
-		dirLight.shadow.camera.left = - 25;
-		dirLight.shadow.camera.right = 25;
 		dirLight.shadow.camera.near = 0.1;
 		dirLight.shadow.camera.far = 200;
-		dirLight.shadow.mapSize.set( 1024, 1024 );
+		dirLight.shadow.mapSize.set( 8000, 8000 );
+        dirLight.shadow.bias = -0.00005;
+        dirLight.shadow.normalBias = -0.00001;
 		scene.add( dirLight );
 
         //scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
@@ -167,7 +160,7 @@ const ViewerPage = () => {
 
         var animate = function () {
             requestAnimationFrame( animate );
-           // checkRotation();
+            testTime();
             renderer.render( scene, camera );
         }
 
@@ -180,8 +173,57 @@ const ViewerPage = () => {
         window.addEventListener("resize", onWindowResize, false);
 
         animate();
-      
-        return () => current.removeChild(renderer.domElement);
+
+        
+
+        window.addEventListener('mousemove', function() {
+            lastTime = new Date().getTime();
+        })
+
+        var turnTime = window.setInterval(testTime, 10);
+
+        var timeOut = 30 * 1000;
+
+        function testTime() {
+            var currentTime = new Date().getTime();
+            console.log("Current Time: " + currentTime);
+            console.log("Last Time: " + lastTime);
+            console.log("CurTime - lastTime: " + (currentTime - lastTime));
+            if (currentTime - lastTime > timeOut) {
+                checkRotation();
+                window.clearInterval(turnTime)
+            }
+
+        }
+
+         
+        return () => { 
+
+            scene.traverse((child) => {
+                const mesh = child;
+                if (mesh.isMesh) {
+                  mesh.geometry.dispose();
+                  const materials = Array.isArray(mesh.material) ? mesh.material : [ mesh.material ];
+                  for (const mat of materials) {
+                    mat.dispose();
+                    console.log("dispose");
+                  }
+                }
+            })
+
+            window.removeEventListener("resize", onWindowResize, false);
+            window.removeEventListener('mousemove', function() {
+                lastTime = new Date().getTime();
+            });
+
+            if(renderer){
+                renderer.forceContextLoss();
+                renderer.dispose();
+                //renderer=undefined;
+                console.log("Renderer: " + renderer);
+            }
+            current.removeChild(renderer.domElement);
+        };
 
     }, [productSelectedId]);
 
@@ -190,14 +232,12 @@ const ViewerPage = () => {
 
             <div id="scene-container">
                 <div ref={mountRef} id="canva"></div>
-                <div id="button-container">
-                    <button onClick={prevButton} id="previous">
-                        <FontAwesomeIcon icon={faChevronLeft} size="5x" color='gray'/>
-                    </button>
-                    <button onClick={nextButton} id="next">
-                        <FontAwesomeIcon icon={faChevronRight} size="5x" color='gray'/>
-                    </button>
-                </div>                
+                <button onClick={prevButton} id="previous">
+                    <FontAwesomeIcon icon={faChevronLeft} size="5x" color='gray'/>
+                </button>
+                <button onClick={nextButton} id="next">
+                    <FontAwesomeIcon icon={faChevronRight} size="5x" color='gray'/>
+                </button>              
             </div>
 
             <div id="info">
