@@ -11,9 +11,13 @@ const ProductItemCard = ({ canvasId, product, pageActual, onClick }) => {
     return (
         <div id='product-item' onClick={handleClick} >
             <div id="img-body">
-                <DisplayArea product={product} canvasId={"canvas"+canvasId} sourceId={"source"+canvasId}/>
+                <DisplayArea product={product} canvasId={"canvas" + canvasId} sourceId={"source" + canvasId} />
             </div>
-            <span>{product.name}</span>
+
+            <div id="name-body">
+                <p>----- <span>{product.name}</span>-----</p>
+            </div>
+
         </div>
     );
 };

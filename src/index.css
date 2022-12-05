@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'lobster';
+  src: local('lobster'), url(./fonts/lobster/Lobster-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'lobsterTwo-Bold';
+  src: local('lobsterTwo-Bold'), url(./fonts/lobster/LobsterTwo-Bold.ttf) format('truetype');
+}
+
+
+@font-face {
+  font-family: 'lobsterTwo-Regular';
+  src: local('lobsterTwo-Regular'), url(./fonts/lobster/LobsterTwo-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'cinzel';
+  src: local('cinzel'), url(./fonts/Cinzel-VariableFont_wght.ttf) format('truetype');
+}

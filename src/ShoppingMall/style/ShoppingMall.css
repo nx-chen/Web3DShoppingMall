@@ -1,3 +1,4 @@
+
 #ShoppingMall {
   height: 100%;
   transition: all 0.5s;
@@ -20,6 +21,7 @@
   font-weight: 500;
   font-size: 70px;
   color:rgb(110, 110, 109);
+  font-family: lobsterTwo-Bold, serif;
 }
 
 /* width */

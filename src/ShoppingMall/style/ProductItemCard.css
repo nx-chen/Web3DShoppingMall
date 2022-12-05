@@ -7,8 +7,14 @@
   box-shadow: 5px 5px 10px rgb(204, 204, 204);
   padding-bottom: 10px;
   transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+  
+}
+
+#name-body {
+  margin-top: 15px;
 
 }
+
 
 #product-item:hover {
   transform: translate(0px, 3px);
@@ -17,9 +23,17 @@
 }
 
 
-#product-item span {
-  font-size: 14px;
-  font-weight: 500;
+#product-item p{
+ 
+ font-weight: 500;
+ color:rgb(110, 110, 109);
+}
+
+#product-item p span{
+  font-size: 20px;
+  font-family: lobsterTwo-Bold, serif;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 
@@ -34,33 +48,6 @@
 
 .hideMe {
   display: none;
-}
-
-#btnNextPage {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-}
-
-#btnNextPage:hover {
-  transform: translate(10px, 0px);
-}
-
-
-#btnPreviousPage {
-  position: fixed;
-  bottom: 40px;
-  left: 40px;
-}
-
-#btnPreviousPage:hover {
-  transform: translate(-10px, 0px);
-}
-
-.btnPagination {
-  background-color: transparent;
-  border: 0;
-  transition: visibility 0s linear 0.33s, opacity 0.33s linear;
 }
 
 .productItem {
