@@ -21,6 +21,7 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
 
 
     useEffect(() => {
+
         init();
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -29,7 +30,6 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
         }
 
         window.addEventListener("resize", onWindowResize, false);
-
 
         return () => mountRef.current?.removeChild(renderer.domElement);
     }, []);

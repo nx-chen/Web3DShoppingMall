@@ -1,12 +1,22 @@
 import './App.css';
-import DisplayArea from './ShoppingMall/DisplayArea';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import ShoppingMall from './ShoppingMall/ShoppingMall';
+import ViewerPage from './ShoppingMall/ViewerPage';
 
 function App() {
   
   return (
     <div className="App">
-      <ShoppingMall />
+      <Router>
+        <Routes>
+          <Route path='/' element={<ShoppingMall />}/>
+          <Route path='/products' element={<ViewerPage />}/>
+        </Routes>
+      </Router>      
     </div>
   );
 }

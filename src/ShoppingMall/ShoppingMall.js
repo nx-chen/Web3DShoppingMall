@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import ProductItemCard from './ProductItemCard';
 import './style/ShoppingMall.css';
 import ShowMore from 'react-show-more-list';
-
-
+import { useNavigate } from "react-router-dom";
 
 const ShoppingMall = () => {
+
+    let navigate = useNavigate();
+    
     const products = [
         [
             { id: 1, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
@@ -70,11 +72,13 @@ const ShoppingMall = () => {
             { id: 20, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
         ];
         */
+        
     const [productSelected, setProductSelected] = useState(products[0]);
 
     const changeSelectedProduct = (product) => {
         console.log(product)
         setProductSelected(product)
+        navigate('/products', { state: { id: product.id } })
     };
 
 
@@ -117,8 +121,6 @@ const ShoppingMall = () => {
         </div>
 
     );
-
-
 
 }
 export default ShoppingMall;
