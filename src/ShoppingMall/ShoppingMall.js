@@ -1,132 +1,124 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ProductItemCard from './ProductItemCard';
-import DisplayArea from './DisplayArea';
 import './style/ShoppingMall.css';
+import ShowMore from 'react-show-more-list';
+
+
 
 const ShoppingMall = () => {
-
     const products = [
-        { name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
-        { name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
-        { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v2.glb" },
-        { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v1.glb" },
-
-        { name: "victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+        [
+            { id: 1, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
+            { id: 2, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
+            { id: 3, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb" },
+        ],
+        [
+            { id: 4, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb" },
+            { id: 5, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb" },
+            { id: 6, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
+        ],
+        [
+            { id: 7, name: "Table", assetPath: "Assets/Meubles/table.glb" },
+            { id: 8, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb" },
+            { id: 9, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+        ],
+        [
+            { id: 10, name: "Small table", assetPath: "Assets/Meubles/small_table.glb" },
+            { id: 11, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb" },
+            { id: 12, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb" },
+        ],
+        [
+            { id: 13, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
+            { id: 14, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
+            { id: 15, name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
+        ],
+        [
+            { id: 16, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb" },
+            { id: 17, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb" },
+            { id: 18, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
+        ],
+        [
+            { id: 19, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
+        ],
     ];
 
+    /*
+        const products = [
+            //armoires
+            { id: 1, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
+            { id: 2, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
+            { id: 3, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb" },
+            { id: 4, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb" },
+            //tables
+            { id: 5, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb" },
+            { id: 6, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
+            { id: 7, name: "Table", assetPath: "Assets/Meubles/table.glb" },
+            { id: 8, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb" },
+            { id: 9, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+            { id: 10, name: "Small table", assetPath: "Assets/Meubles/small_table.glb" },
+            //sofas chaises
+            { id: 11, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb" },
+            { id: 12, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb" },
+            { id: 13, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
+            { id: 14, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
+            { id: 15, name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
+            //autres
+            { id: 16, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb" },
+            { id: 17, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb" },
+            { id: 18, name: "Retro piano", assetPath: "Assets/Meubles/retro-piano.glb" },
+            { id: 19, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
+            { id: 20, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
+        ];
+        */
     const [productSelected, setProductSelected] = useState(products[0]);
-    const [pageActual, setPageActual] = useState(0);
-    const [pageMax, setPageMax] = useState(0);
-
-    useEffect(() => {
-        
-    }, [])
 
     const changeSelectedProduct = (product) => {
         console.log(product)
         setProductSelected(product)
-
     };
 
 
     return (
         <div id="ShoppingMall">
-            <div id="list-products">
-                <div id="list-title">
-                    <p>Our Products</p>
-                </div>
-                <div id="list-products-body">
-                    {products.map((prod, i) => (
-                        <ProductItemCard key={i} canvasId={i} product={prod} onClick={changeSelectedProduct} />
-                    ))}
-                </div>
-
+            <div id="list-title">
+                <p>Our Products</p>
             </div>
 
-        </div>
-    );
-}
-export default ShoppingMall;
-/*
-class ShoppingMall extends Component {
-
-    state = {
-        isFullScreen: false,
-        scenes: [
-            { name: "Scene 1", assetPath: "Assets/Scenes/" },
-            { name: "Scene 2", assetPath: "Assets/Scenes/" },
-            { name: "Scene 3", assetPath: "Assets/Scenes/" },
-        ],
-        products: [
-            { name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb", imagePath: "Assets/Meubles/antique_dresser_blue.png" },
-            { name: "Antique dresser green", assetPath: "Assets/Meubles/antique_dresser_green.glb", imagePath: "Assets/Meubles/antique_dresser_green.png" },
-            { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/grand_classic_edwardian_dining_armchair.glb", imagePath: "Assets/Meubles/grand_classic_edwardian_dining_armchair.png" },
-            { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair.glb", imagePath: "Assets/Meubles/victorian_chair.png" },
-
-            { name: "victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb", imagePath: "Assets/Meubles/victorian_desk_with_props.png" },
-        ],
-        productSelected: null,
-        sceneSelected:  null,
-    };
-
-    componentDidMount() {
-        //when user scroll, switch full screen or not
-        window.addEventListener('mousewheel', (e) => {
-            if (e.deltaY > 0) {
-                this.setState({
-                    isFullScreen: true,
-                })
-            } else {
-                this.setState({
-                    isFullScreen: false,
-                })
-            }
-        });
-        this.setState({
-            productSelected: this.state.products[0],
-            sceneSelected:this.state.scenes[0]
-        })
-    }
-
-    changeSelectedProduct = (product) => {
-        console.log(product)
-        this.setState({
-            productSelected: product
-        });
-      };
-
-      changeSelectedScene = (scene) => {
-        console.log(scene)
-        this.setState({
-            sceneSelected: scene
-        });
-      };
-
-    render() {
-        return (
-            <div id="ShoppingMall">
-                <div id="list-products" className={this.state.isFullScreen ? "fullscreen" : null}>
-                    <div id="list-title">
-                        <p>Our Products</p>
-                    </div>
+            <ShowMore
+                items={products}
+                by={2}
+            >
+                {({
+                    current,
+                    onMore,
+                }) => (
                     <div id="list-products-body">
-                        {this.state.products.map((prod, i) => (
-                            <ProductItemCard key={i} canvasId={i} product={prod} onClick = {this.changeSelectedProduct}/>
-                        ))}
-                    </div>
-                </div>
-                <div id="list-scenes" className={this.state.isFullScreen ? "fullscreen" : null}>
-                    <div id="list-title">
-                        <p>Change scene</p>
-                    </div>
+                        <React.Fragment>
+                            {current.map((row, i) => {
+                                return <div key={i} className='listRow'>
+                                    {row.map(item => {
+                                        return <ProductItemCard key={item.id} canvasId={item.id} product={item} onClick={changeSelectedProduct} />
+                                    })}
+                                </div>
+                            })}
+                        </React.Fragment>
+                        {!onMore ? null :
+                            <button
+                                id="btnShowMore"
+                                disabled={!onMore}
+                                onClick={() => { if (!!onMore) onMore(); }}
+                            >
+                                ... Show More ...
+                            </button>}
 
-                </div>
-                
-            </div>
-        );
-    }
+                    </div>
+                )}
+            </ShowMore>
+        </div>
+
+    );
+
+
+
 }
-
 export default ShoppingMall;
-
-*/
