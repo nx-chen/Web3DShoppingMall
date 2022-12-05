@@ -17,13 +17,32 @@ const ViewerPage = () => {
 
     const mountRef = useRef(null);
 
-    const products = [
-        { id: 0, name: "Antique Dresser Blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
-        { id: 1, name: "Antique Dresser Green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
-        { id: 2, name: "Grand Classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
-        { id: 3, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
-        { id: 4, name: "Victorian Desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
-    ];
+     const products = [
+            //armoires
+            { id: 1, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
+            { id: 2, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
+            { id: 3, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb" },
+            { id: 4, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb" },
+            //tables
+            { id: 5, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb" },
+            { id: 6, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
+            { id: 7, name: "Table", assetPath: "Assets/Meubles/table.glb" },
+            { id: 8, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb" },
+            { id: 9, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+            { id: 10, name: "Small table", assetPath: "Assets/Meubles/small_table.glb" },
+            //sofas chaises
+            { id: 11, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb" },
+            { id: 12, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb" },
+            { id: 13, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
+            { id: 14, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
+            { id: 15, name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
+            //autres
+            { id: 16, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb" },
+            { id: 17, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb" },
+            { id: 18, name: "Retro piano", assetPath: "Assets/Meubles/retro-piano.glb" },
+            { id: 19, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
+            { id: 20, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
+        ];
 
     const [productSelectedId, setProductSelectedId] = useState(state.id);
 
@@ -107,18 +126,21 @@ const ViewerPage = () => {
 
         //shadow
 
-        /*const ground = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+        const ground = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
 		ground.rotation.x = - Math.PI / 2;
-		ground.position.y = -1;
-        ground.position.z = 0;
-        ground.position.x = 0;
+
+		camera.position.x = 1;
+        camera.position.z = 6;
+        camera.position.y = 2;
+        camera.lookAt(0, 0, 0);
+
 		ground.receiveShadow = true;
 		scene.add( ground );
-
+/*
         const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
 		hemiLight.position.set( 0, 100, 0 );
 		scene.add( hemiLight );
-
+*/
         const dirLight = new THREE.DirectionalLight( 0xffffff );
 		dirLight.position.set( - 0, 40, 50 );
 		dirLight.castShadow = true;
@@ -129,7 +151,7 @@ const ViewerPage = () => {
 		dirLight.shadow.camera.near = 0.1;
 		dirLight.shadow.camera.far = 200;
 		dirLight.shadow.mapSize.set( 1024, 1024 );
-		scene.add( dirLight );*/
+		scene.add( dirLight );
 
         //scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
@@ -147,7 +169,7 @@ const ViewerPage = () => {
 
         var animate = function () {
             requestAnimationFrame( animate );
-            checkRotation();
+           // checkRotation();
             renderer.render( scene, camera );
         }
 
