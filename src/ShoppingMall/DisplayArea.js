@@ -112,14 +112,11 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
 
             ctx.imageSmoothingEnabled = false;
 
-            // ctx.drawImage(image, -100, 0,canvas.innerWidth,canvas.innerHeight);
             const imageWidth = document.getElementById(sourceId).children[0].width;
             const imageHeight = document.getElementById(sourceId).children[0].height;
             const canvasHeight = document.getElementById(canvasId).height;
 
             ctx.drawImage(image, 290, 0, imageWidth,imageHeight, 0, 0,canvasHeight * (imageWidth/imageHeight) , canvasHeight);
-            //ctx.drawImage(image, 0, 0);
-            //ctx.drawImage(image, 0, 0, 352, 237, 0, 0, 352, 237);
         }
     }, [isLoading])
 
