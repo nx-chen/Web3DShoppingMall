@@ -10,7 +10,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const ViewerPage = () => {
     const { state } = useLocation();
@@ -77,7 +77,7 @@ const ViewerPage = () => {
 
         var renderer = new THREE.WebGLRenderer({antialias: true});
 
-        renderer.setSize( window.innerWidth* 0.75, window.innerHeight * 0.9 );
+        renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.outputEncoding = THREE.sRGBEncoding;
 		renderer.shadowMap.enabled = true;
@@ -94,8 +94,18 @@ const ViewerPage = () => {
         scene.background = new THREE.Color( 0xbfe3dd );
 		scene.environment = pmremGenerator.fromScene( environment ).texture;
 
-        camera.position.y = 0.1;
-        camera.position.z = 5;
+        const ground = new THREE.Mesh( 
+            new THREE.PlaneGeometry( 8, 8 ), 
+            new THREE.MeshPhongMaterial( { color: 0xbfe3dd, depthWrite: false } ) );
+		ground.rotation.x = - Math.PI / 2;
+
+		camera.position.x = 1;
+        camera.position.z = 8;
+        camera.position.y = 4;
+        camera.lookAt(0, 0, 0);
+
+		ground.receiveShadow = true;
+		scene.add( ground );
 
         const loader = new GLTFLoader();
         loader.load(
@@ -123,19 +133,8 @@ const ViewerPage = () => {
 
         //shadow
 
-        const ground = new THREE.Mesh( new THREE.PlaneGeometry( 8, 8 ), new THREE.MeshPhongMaterial( { color: 0xbfe3dd, depthWrite: false } ) );
-		ground.rotation.x = - Math.PI / 2;
-
-		camera.position.x = 1;
-        camera.position.z = 6;
-        camera.position.y = 2;
-        camera.lookAt(0, 0, 0);
-
-		ground.receiveShadow = true;
-		scene.add( ground );
-
-        const dirLight = new THREE.DirectionalLight( 0xbfe3dd, 2.58 );
-		dirLight.position.set( -10, 20, 50 );
+        const dirLight = new THREE.DirectionalLight( 0xbfe3dd, 1.45 );
+		dirLight.position.set( -10, 20, 20 );
 		dirLight.castShadow = true;
 		dirLight.shadow.camera.near = 0.1;
 		dirLight.shadow.camera.far = 200;
@@ -167,7 +166,7 @@ const ViewerPage = () => {
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth * 0.75, window.innerHeight*0.9 );
+            renderer.setSize( window.innerWidth, window.innerHeight );
         }
 
         window.addEventListener("resize", onWindowResize, false);
@@ -186,9 +185,6 @@ const ViewerPage = () => {
 
         function testTime() {
             var currentTime = new Date().getTime();
-            console.log("Current Time: " + currentTime);
-            console.log("Last Time: " + lastTime);
-            console.log("CurTime - lastTime: " + (currentTime - lastTime));
             if (currentTime - lastTime > timeOut) {
                 checkRotation();
                 window.clearInterval(turnTime)
@@ -231,18 +227,21 @@ const ViewerPage = () => {
         <div className='viewerPage'>
 
             <div id="scene-container">
+                <div id="titleArea">
+                    <span id="title">{products[productSelectedId].name}</span>
+                </div>
+                <button id="back">
+                    <FontAwesomeIcon icon={faBars} size="5x" color='#5d7a76'/>
+                </button>   
                 <div ref={mountRef} id="canva"></div>
-                <button onClick={prevButton} id="previous">
-                    <FontAwesomeIcon icon={faChevronLeft} size="5x" color='gray'/>
+                <button onClick={prevButton} id="previous" className='btnChangePage'>
+                    <FontAwesomeIcon icon={faChevronLeft} size="5x" color='#5d7a76'/>
                 </button>
-                <button onClick={nextButton} id="next">
-                    <FontAwesomeIcon icon={faChevronRight} size="5x" color='gray'/>
+                <button onClick={nextButton} id="next" className='btnChangePage'>
+                    <FontAwesomeIcon icon={faChevronRight} size="5x" color='#5d7a76'/>
                 </button>              
             </div>
 
-            <div id="info">
-                <h3>{products[productSelectedId].name}</h3>
-            </div>
         </div>
     );
 }

@@ -30,7 +30,7 @@ const ShoppingMall = () => {
             { id: 11, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb" },
         ],
         [
-            { id: 12, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
+            { id: 12, name: "Classic Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
             { id: 13, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
             { id: 14, name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
         ],

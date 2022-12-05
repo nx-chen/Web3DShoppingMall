@@ -8,12 +8,37 @@
 
 #scene-container
 {
-    width: 75%;
+    position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #bfe3dd;
+    width: 100%;
+    padding-top: 40px;
 }
+
+#titleArea {
+    position: absolute;
+    top:62px ;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#title {
+    color: #5d7a76;
+    font-family: lobsterTwo-Bold, serif;
+    font-size: 60px;
+    font-weight: 500;
+    
+}
+
+#back{
+    position: absolute;
+    top: 62px;
+    left: 15px;
+}
+
 
 #canva
 {
@@ -23,16 +48,17 @@
 
 #previous
 {
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    position: absolute;
+    left:100px;
+    bottom: 50vh;
 }
 
 #next
 {
-    position: fixed;
-    right: 0;
-    bottom: 0;
+    position: absolute;
+    right: 100px;
+    bottom: 50vh;
+
 }
 
 #button-container
@@ -59,8 +85,29 @@ button {
 
 #info
 {
-    width: 25%;
-    display: flex;
-    flex-direction: column;   
-    align-items: center;
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    transition: all 0.5s;
+    background-color:whitesmoke;
+    right: 0;
+    top: 0;
 }
+
+#info.fullscreen {
+    transform: translate(100%,0);
+  }
+
+  .btnChangePage {
+    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+  }
+
+  #previous:hover {
+    transform: translate(-10px, 0px);
+  }
+
+  #next:hover {
+    transform: translate(10px, 0px);
+  }
+  
