@@ -25,7 +25,7 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth / 3, window.innerHeight / 3);
+            renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
         window.addEventListener("resize", onWindowResize, false);
@@ -37,12 +37,12 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
 
     const init = () => {
 
-        camera.position.x = 2;
+        camera.position.x = 1;
         camera.position.z = 3;
-        camera.position.y = 3;
+        camera.position.y = 2.2;
 
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth / 4, window.innerHeight / 4);
+        renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
         const environment = new RoomEnvironment();
@@ -69,7 +69,6 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
             loader.load(
                 meublePath,
                 (gltf) => {
-                    console.log(gltf);
                     scene.add(gltf.scene);
                     resolve(setIsLoading(false));
                 },
@@ -116,14 +115,11 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
             // ctx.drawImage(image, -100, 0,canvas.innerWidth,canvas.innerHeight);
             const imageWidth = document.getElementById(sourceId).children[0].width;
             const imageHeight = document.getElementById(sourceId).children[0].height;
-            const canvasWidth = document.getElementById(canvasId).width;
             const canvasHeight = document.getElementById(canvasId).height;
 
-            console.log(canvasWidth, "------", canvasHeight);
-            console.log(imageWidth, "------", imageHeight);
-            //    ctx.drawImage(image, 75, 30, imageWidth / 2,imageHeight / 2, 0, 0,canvasWidth , canvasHeight);
-            ctx.drawImage(image, -35, 40);
-            //ctx.drawImage(image, 75, 30, 428, 390, 60, 0, 250, 225);
+            ctx.drawImage(image, 290, 0, imageWidth,imageHeight, 0, 0,canvasHeight * (imageWidth/imageHeight) , canvasHeight);
+            //ctx.drawImage(image, 0, 0);
+            //ctx.drawImage(image, 0, 0, 352, 237, 0, 0, 352, 237);
         }
     }, [isLoading])
 

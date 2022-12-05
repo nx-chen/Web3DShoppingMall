@@ -35,11 +35,10 @@ const ShoppingMall = () => {
         [
             { id: 16, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb" },
             { id: 17, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb" },
-            { id: 18, name: "Retro piano", assetPath: "Assets/Meubles/retro-piano.glb" },
+            { id: 18, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
         ],
         [
-            { id: 19, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
-            { id: 20, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
+            { id: 19, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
         ],
     ];
 
