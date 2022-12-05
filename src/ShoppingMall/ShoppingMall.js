@@ -1,18 +1,20 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductItemCard from './ProductItemCard';
-import DisplayArea from './DisplayArea';
 import './style/ShoppingMall.css';
+
+import { useNavigate } from "react-router-dom";
 
 const ShoppingMall = () => {
 
     const products = [
-        { name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
-        { name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
-        { name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v2.glb" },
-        { name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v1.glb" },
-
-        { name: "victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
+        { id: 0, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
+        { id: 1, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
+        { id: 2, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
+        { id: 3, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
+        { id: 4, name: "victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
     ];
+
+    let navigate = useNavigate();
 
     const [productSelected, setProductSelected] = useState(products[0]);
     const [pageActual, setPageActual] = useState(0);
@@ -25,7 +27,7 @@ const ShoppingMall = () => {
     const changeSelectedProduct = (product) => {
         console.log(product)
         setProductSelected(product)
-
+        navigate('/products', { state: { id: product.id } })
     };
 
 
@@ -42,7 +44,6 @@ const ShoppingMall = () => {
                 </div>
 
             </div>
-
         </div>
     );
 }

@@ -22,6 +22,13 @@ const DisplayArea = ({ product }) => {
     const control = new OrbitControls(camera, renderer.domElement);
 
     useEffect(() => {
+
+        const { current } = mountRef;
+
+        if (!current) {
+            return;
+        }
+
         init();
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -32,7 +39,7 @@ const DisplayArea = ({ product }) => {
         window.addEventListener("resize", onWindowResize, false);
 
 
-        return () => mountRef.current.removeChild(renderer.domElement);
+        return () => current.removeChild(renderer.domElement);
     }, []);
 
 
