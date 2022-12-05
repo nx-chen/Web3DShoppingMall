@@ -58,6 +58,7 @@ const ShoppingMall = () => {
             </div>
 
             <ShowMore
+                id="AllList"
                 items={products}
                 by={2}
             >
