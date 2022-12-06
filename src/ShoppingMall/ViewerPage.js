@@ -10,11 +10,14 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
+import { useNavigate } from "react-router-dom";
 
 const ViewerPage = () => {
     const { state } = useLocation();
 
+    let navigate = useNavigate();
     const mountRef = useRef(null);
 
     const products = [
@@ -59,8 +62,10 @@ const ViewerPage = () => {
             setProductSelectedId(productSelectedId + 1);
     }
 
-    // to remove srolling
-    document.body.style.overflow = "hidden";
+    const backToList = () => {
+        navigate('/');
+    }
+
     let lastTime = new Date().getTime();
 
     useEffect(() => {
@@ -326,13 +331,13 @@ const ViewerPage = () => {
 
             renderer.domElement.removeEventListener('dblclick', zoomCam);
 
-            /*if(renderer){
+            if(renderer){
 
                 renderer.forceContextLoss();
-                renderer.dispose();
+                //renderer.dispose();
                 //renderer=undefined;
                 console.log("Renderer: " + renderer);
-            }*/
+            }
         };
 
     }, [productSelectedId]);
@@ -353,8 +358,8 @@ const ViewerPage = () => {
                     <span id="title">{products[productSelectedId].name}</span>
                 </div>
 
-                <button id="back">
-                    <FontAwesomeIcon icon={faBars} size="5x" color='#5d7a76' />
+                <button id="back" onClick={backToList}>
+                    <FontAwesomeIcon icon={faArrowLeft} size="5x" color='#5d7a76' />
                 </button>
                 <div ref={mountRef} id="canva"></div>
                 <button onClick={prevButton} id="previous" className='btnChangePage'>
