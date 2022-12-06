@@ -30,13 +30,14 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
         }
 
         window.addEventListener("resize", onWindowResize, false);
-
         return () => {
             console.log("=======");
             mountRef.current?.removeChild(renderer.domElement);
-          
+
         }
     }, []);
+
+
 
 
     const init = () => {
@@ -123,11 +124,9 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
             const imageWidth = document.getElementById(sourceId).children[0].width;
             const imageHeight = document.getElementById(sourceId).children[0].height;
             const canvasHeight = document.getElementById(canvasId).height;
-            console.log("====1===");
+
             ctx.drawImage(image, 290, 0, imageWidth, imageHeight, 0, 0, canvasHeight * (imageWidth / imageHeight), canvasHeight);
             destroy();
-            image.parentElement.removeChild(document.getElementById(sourceId).children[0]);
-            console.log("canvas:",document.getElementById(sourceId));
         }
     }, [isLoading])
 
@@ -136,21 +135,21 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
         scene.traverse((child) => {
             const mesh = child;
             if (mesh.isMesh) {
-              mesh.geometry.dispose();
-              const materials = Array.isArray(mesh.material) ? mesh.material : [ mesh.material ];
-              for (const mat of materials) {
-                mat.dispose();
-                console.log("dispose");
-              }
+                mesh.geometry.dispose();
+                const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+                for (const mat of materials) {
+                    mat.dispose();
+                }
             }
         })
-
+        scene.clear();
         renderer.forceContextLoss();
         renderer.dispose();
+        
         renderer.clear();
+
         renderer.domElement = null;
-       // renderer = null;
-        console.log("====renderer===", renderer);
+        renderer = null;
 
     }
 
