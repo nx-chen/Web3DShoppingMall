@@ -83,7 +83,7 @@ const ViewerPage = () => {
         renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        
+
         current.appendChild(renderer.domElement);
 
         const controls = new OrbitControls(camera, renderer.domElement);
@@ -149,10 +149,10 @@ const ViewerPage = () => {
 
 
         // Rotation
-        function checkRotation(){
+        function checkRotation() {
 
             var rotSpeed = .01
-            
+
             var x = camera.position.x,
                 y = camera.position.y,
                 z = camera.position.z;
@@ -166,8 +166,7 @@ const ViewerPage = () => {
 
         const mouse = new THREE.Vector2();
 
-        function zoomCam(event)
-        {
+        function zoomCam(event) {
             event.preventDefault();
             const canvas = renderer.domElement;
             const w = canvas.clientWidth;
@@ -185,9 +184,8 @@ const ViewerPage = () => {
 
             var intersects = raycaster.intersectObjects(scene.children, true);
             console.log("intersects: " + intersects)
-            if (intersects && intersects.length > 0)
-            {
-                controls.target.set(intersects[0].point.x,intersects[0].point.y,intersects[0].point.z);
+            if (intersects && intersects.length > 0) {
+                controls.target.set(intersects[0].point.x, intersects[0].point.y, intersects[0].point.z);
                 controls.maxDistance = 2;
                 controls.update();
                 controls.maxDistance = 10;
@@ -195,7 +193,7 @@ const ViewerPage = () => {
         }
 
         renderer.domElement.addEventListener('dblclick', zoomCam);
-    
+
 
         // annotation
         const canvas = document.getElementById('number');
@@ -229,7 +227,8 @@ const ViewerPage = () => {
             alphaTest: 0,
             transparent: true,
             depthTest: false,
-            depthWrite: false });
+            depthWrite: false
+        });
 
         const sprite = new THREE.Sprite(spriteMaterial);
         sprite.position.set(250, 250, 250);
@@ -240,12 +239,12 @@ const ViewerPage = () => {
         function updateScreenPosition() {
             const vector = new THREE.Vector3(0.5, 0.2, 0.2);
             const canvas = renderer.domElement;
-        
+
             vector.project(camera);
-        
+
             vector.x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio));
             vector.y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio));
-        
+
             annotation.style.top = `${vector.y}px`;
             annotation.style.left = `${vector.x}px`;
             annotation.style.opacity = 1;
@@ -253,11 +252,15 @@ const ViewerPage = () => {
 
 
         var animate = function () {
-            requestAnimationFrame( animate );
-            testTime();          
-            renderer.render( scene, camera );
+            requestAnimationFrame(animate);
+            testTime();
+            render();
             updateScreenPosition();
 
+        }
+
+        var render = () => {
+             renderer.render(scene, camera);
         }
 
         let onWindowResize = function () {
@@ -275,16 +278,14 @@ const ViewerPage = () => {
             lastTime = new Date().getTime();
             console.log(camera.position);
 
-            if (camera.position.x <= 8 &&  camera.position.z >= 2 && camera.position.x >= -1 && camera.position.z <= 9)
-{
-    setDescription(0);
-}
-else if (camera.position.x <=-1 &&  camera.position.x >= -6)
-{
-    setDescription(1);
-} else {
-    setDescription(2);
-}
+            if (camera.position.x <= 8 && camera.position.z >= 2 && camera.position.x >= -1 && camera.position.z <= 9) {
+                setDescription(0);
+            }
+            else if (camera.position.x <= -1 && camera.position.x >= -6) {
+                setDescription(1);
+            } else {
+                setDescription(2);
+            }
 
         })
 
@@ -331,7 +332,7 @@ else if (camera.position.x <=-1 &&  camera.position.x >= -6)
                 renderer.dispose();
                 //renderer=undefined;
                 console.log("Renderer: " + renderer);
-            }*/         
+            }*/
         };
 
     }, [productSelectedId]);
@@ -362,13 +363,13 @@ else if (camera.position.x <=-1 &&  camera.position.x >= -6)
                 <button onClick={nextButton} id="next" className='btnChangePage'>
                     <FontAwesomeIcon icon={faChevronRight} size="5x" color='#5d7a76' />
                 </button>
-                <div id="description1" className="descriptionArea"  hidden={description === 0 ? false : true}>
+                <div id="description1" className="descriptionArea" hidden={description === 0 ? false : true}>
                     <span className="description">{products[productSelectedId].describe[0]}</span>
                 </div>
-                <div  id="description2" className="descriptionArea" hidden={description === 1 ? false : true}>
+                <div id="description2" className="descriptionArea" hidden={description === 1 ? false : true}>
                     <span className="description" >{products[productSelectedId].describe[1]}</span>
                 </div>
-                <div  id="description3" className="descriptionArea" hidden={description === 2 ? false : true}> 
+                <div id="description3" className="descriptionArea" hidden={description === 2 ? false : true}>
                     <span className="description" >{products[productSelectedId].describe[2]}</span>
                 </div>
 

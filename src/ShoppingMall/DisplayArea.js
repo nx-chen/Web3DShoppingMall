@@ -88,9 +88,13 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
 
     const animate = () => {
         requestAnimationFrame(animate);
-        renderer.render(scene, camera);
+        render();
 
         control.update()
+    }
+
+    const render = () => {
+        renderer.render(scene, camera);
     }
 
     useEffect(() => {
