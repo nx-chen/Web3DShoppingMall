@@ -66,8 +66,6 @@ const ViewerPage = () => {
         navigate('/');
     }
 
-    // to remove srolling
-    document.body.style.overflow = "hidden";
     let lastTime = new Date().getTime();
 
     useEffect(() => {
