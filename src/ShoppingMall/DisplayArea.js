@@ -13,7 +13,7 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100000);
-    const renderer = new THREE.WebGLRenderer({
+    let renderer = new THREE.WebGLRenderer({
         antialias: true
 
     });
@@ -31,7 +31,11 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
 
         window.addEventListener("resize", onWindowResize, false);
 
-        return () => mountRef.current?.removeChild(renderer.domElement);
+        return () => {
+            console.log("=======");
+            mountRef.current?.removeChild(renderer.domElement);
+          
+        }
     }, []);
 
 
@@ -115,11 +119,36 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
             const imageWidth = document.getElementById(sourceId).children[0].width;
             const imageHeight = document.getElementById(sourceId).children[0].height;
             const canvasHeight = document.getElementById(canvasId).height;
-
-            ctx.drawImage(image, 290, 0, imageWidth,imageHeight, 0, 0,canvasHeight * (imageWidth/imageHeight) , canvasHeight);
+            console.log("====1===");
+            ctx.drawImage(image, 290, 0, imageWidth, imageHeight, 0, 0, canvasHeight * (imageWidth / imageHeight), canvasHeight);
+            destroy();
+            image.parentElement.removeChild(document.getElementById(sourceId).children[0]);
+            console.log("canvas:",document.getElementById(sourceId));
         }
     }, [isLoading])
 
+
+    const destroy = () => {
+        scene.traverse((child) => {
+            const mesh = child;
+            if (mesh.isMesh) {
+              mesh.geometry.dispose();
+              const materials = Array.isArray(mesh.material) ? mesh.material : [ mesh.material ];
+              for (const mat of materials) {
+                mat.dispose();
+                console.log("dispose");
+              }
+            }
+        })
+
+        renderer.forceContextLoss();
+        renderer.dispose();
+        renderer.clear();
+        renderer.domElement = null;
+       // renderer = null;
+        console.log("====renderer===", renderer);
+
+    }
 
     return (
         <div className="productItem">

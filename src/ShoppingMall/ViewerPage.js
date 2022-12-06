@@ -10,7 +10,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const ViewerPage = () => {
     const { state } = useLocation();
@@ -19,42 +19,41 @@ const ViewerPage = () => {
 
     const products = [
         //armoires
-        { id: 0, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb" },
-        { id: 1, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb" },
-        { id: 2, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb" },
-        { id: 3, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb" },
+        { id: 0, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb", describe: ["The best dresser you can find", "Made of wood", "Color vivid"] },
+        { id: 1, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb", describe: ["Dresser antique", "Made of wood", "Color vivid"] },
+        { id: 2, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb", describe: ["The best wardrobe you can find", "Made of wood", "Color vivid"] },
+        { id: 3, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb", describe: ["Little bedside table for your bedroom", "Made of wood", "Color vivid"] },
         //tables
-        { id: 4, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb" },
-        { id: 5, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb" },
-        { id: 6, name: "Table", assetPath: "Assets/Meubles/table.glb" },
-        { id: 7, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb" },
-        { id: 8, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb" },
-        { id: 9, name: "Small table", assetPath: "Assets/Meubles/small_table.glb" },
+        { id: 4, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb", describe: ["The best desk antique you can find", "Made of wood", "Color vivid"] },
+        { id: 5, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb", describe: ["Table anitique", "Made of wood", "Color vivid"] },
+        { id: 6, name: "Table", assetPath: "Assets/Meubles/table.glb", describe: ["Lovely table", "Made of wood", "Color vivid"] },
+        { id: 7, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb", describe: ["The best table for your dining room", "Made of wood", "Color vivid"] },
+        { id: 8, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb", describe: ["The best desk you can find", "Made of wood", "Color vivid"] },
+        { id: 9, name: "Small table", assetPath: "Assets/Meubles/small_table.glb", describe: ["Little table suitable for you", "Made of wood", "Color vivid"] },
         //sofas chaises
-        { id: 10, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb" },
-        { id: 11, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb" },
-        { id: 12, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb" },
-        { id: 13, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb" },
-        { id: 14, name: "Couch", assetPath: "Assets/Meubles/couch.glb" },
+        { id: 10, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb", describe: ["The best sofa you can find", "Comfortable", "Color vivid"] },
+        { id: 11, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb", describe: ["The best Chair for your home", "Made of wood", "Color vivid"] },
+        { id: 12, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb", describe: ["The best Chair for your dining room", "Made of wood", "Color vivid"] },
+        { id: 13, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb", describe: ["The best Chair for your dining room", "Made of wood", "Color vivid"] },
+        { id: 14, name: "Couch", assetPath: "Assets/Meubles/couch.glb", describe: ["The best couch you can find", "Comfortable", "Made for whole family"] },
         //autres
-        { id: 15, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb" },
-        { id: 16, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb" },
-        { id: 17, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb" },
-        { id: 18, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb" },
+        { id: 15, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb", describe: ["The gramophone antique", "Play your music", "Color vivid"] },
+        { id: 16, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb", describe: ["The best gramophone you can find", "Play your music", "Color vivid"] },
+        { id: 17, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb", describe: ["The best rocking horse for your kids", "Made of wood", "Color vivid"] },
+        { id: 18, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb", describe: ["The best bird cage you can find", "Beautiful and classic", "Color vivid"] },
     ];
     const [productSelectedId, setProductSelectedId] = useState(state.id);
-
-
-    var renderer = new THREE.WebGLRenderer({antialias: true});
+    const [description, setDescription] = useState(0);
 
     const prevButton = () => {
-        if(productSelectedId === 0)
-            setProductSelectedId(products.length - 1);        
+        if (productSelectedId === 0)
+            setProductSelectedId(products.length - 1);
         else
             setProductSelectedId(productSelectedId - 1);
+
     }
     const nextButton = () => {
-        if(productSelectedId === products.length - 1)
+        if (productSelectedId === products.length - 1)
             setProductSelectedId(0);
         else
             setProductSelectedId(productSelectedId + 1);
@@ -73,41 +72,53 @@ const ViewerPage = () => {
         }
 
         var scene = new THREE.Scene();
-        
-        var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 0.1, 1000 );       
 
-        renderer.setSize( window.innerWidth* 0.75, window.innerHeight * 0.9 );
-        renderer.setPixelRatio( window.devicePixelRatio );
-		renderer.outputEncoding = THREE.sRGBEncoding;
-		renderer.shadowMap.enabled = true;
-		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        var renderer = new THREE.WebGLRenderer({ antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         
         current.appendChild(renderer.domElement);
 
         const controls = new OrbitControls(camera, renderer.domElement);
+
         controls.maxDistance = 10;
 
         controls.listenToKeyEvents(renderer.domElement)
-        
+
 
         const environment = new RoomEnvironment();
-        const pmremGenerator = new THREE.PMREMGenerator( renderer );
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
-        scene.background = new THREE.Color( 0xbfe3dd );
-		scene.environment = pmremGenerator.fromScene( environment ).texture;
+        scene.background = new THREE.Color(0xbfe3dd);
+        scene.environment = pmremGenerator.fromScene(environment).texture;
 
-        camera.position.y = 0.1;
-        camera.position.z = 5;
+        const ground = new THREE.Mesh(
+            new THREE.PlaneGeometry(8, 8),
+            new THREE.MeshPhongMaterial({ color: 0xbfe3dd, depthWrite: false }));
+        ground.rotation.x = - Math.PI / 2;
+
+        camera.position.x = 1;
+        camera.position.z = 8;
+        camera.position.y = 4;
+        camera.lookAt(0, 0, 0);
+
+        ground.receiveShadow = true;
+        scene.add(ground);
 
         const loader = new GLTFLoader();
         loader.load(
             products[productSelectedId].assetPath,
-            (gltf) => 
-            {
+            (gltf) => {
                 gltf.scene.traverse(
                     (child) => {
-                        if(child instanceof THREE.Mesh)
-                        {
+                        if (child instanceof THREE.Mesh) {
                             child.castShadow = true;
                         }
                     }
@@ -117,48 +128,38 @@ const ViewerPage = () => {
             (xhr) => {
                 console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
             },
-            (error) => 
-            {  
+            (error) => {
                 console.log(error);
             }
         );
 
         //shadow
 
-        const ground = new THREE.Mesh( new THREE.PlaneGeometry( 8, 8 ), new THREE.MeshPhongMaterial( { color: 0xbfe3dd, depthWrite: false } ) );
-		ground.rotation.x = - Math.PI / 2;
-
-		camera.position.x = 1;
-        camera.position.z = 6;
-        camera.position.y = 2;
-        camera.lookAt(0, 0, 0);
-
-		ground.receiveShadow = true;
-		scene.add( ground );
-
-        const dirLight = new THREE.DirectionalLight( 0xbfe3dd, 2.58 );
-		dirLight.position.set( -10, 20, 50 );
-		dirLight.castShadow = true;
-		dirLight.shadow.camera.near = 0.1;
-		dirLight.shadow.camera.far = 200;
-		dirLight.shadow.mapSize.set( 8000, 8000 );
+        const dirLight = new THREE.DirectionalLight(0xbfe3dd, 1.45);
+        dirLight.position.set(-10, 20, 20);
+        dirLight.castShadow = true;
+        dirLight.shadow.camera.near = 0.1;
+        dirLight.shadow.camera.far = 200;
+        dirLight.shadow.mapSize.set(8000, 8000);
         dirLight.shadow.bias = -0.00005;
         dirLight.shadow.normalBias = -0.00001;
-		scene.add( dirLight );
+        scene.add(dirLight);
 
         //scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
+
 
         // Rotation
         function checkRotation(){
 
             var rotSpeed = .01
+            
             var x = camera.position.x,
-              y = camera.position.y,
-              z = camera.position.z;
+                y = camera.position.y,
+                z = camera.position.z;
             camera.position.x = x * Math.cos(rotSpeed) - z * Math.sin(rotSpeed);
-            camera.position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);      
+            camera.position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);
             camera.lookAt(scene.position);
-          
+
         }
 
         // Zoom on double click
@@ -256,20 +257,35 @@ const ViewerPage = () => {
             testTime();          
             renderer.render( scene, camera );
             updateScreenPosition();
+
         }
 
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth * 0.75, window.innerHeight*0.9 );
+            renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
         window.addEventListener("resize", onWindowResize, false);
 
-        animate();        
+        animate();
 
-        window.addEventListener('mousemove', function() {
+        window.addEventListener('mousemove', function () {
+
             lastTime = new Date().getTime();
+            console.log(camera.position);
+
+            if (camera.position.x <= 8 &&  camera.position.z >= 2 && camera.position.x >= -1 && camera.position.z <= 9)
+{
+    setDescription(0);
+}
+else if (camera.position.x <=-1 &&  camera.position.x >= -6)
+{
+    setDescription(1);
+} else {
+    setDescription(2);
+}
+
         })
 
         var turnTime = window.setInterval(testTime, 10);
@@ -285,31 +301,32 @@ const ViewerPage = () => {
 
         }
 
-         
-        return () => { 
+
+        return () => {
 
             scene.traverse((child) => {
                 const mesh = child;
                 if (mesh.isMesh) {
-                  mesh.geometry.dispose();
-                  const materials = Array.isArray(mesh.material) ? mesh.material : [ mesh.material ];
-                  for (const mat of materials) {
-                    mat.dispose();
-                    console.log("dispose");
-                  }
+                    mesh.geometry.dispose();
+                    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+                    for (const mat of materials) {
+                        mat.dispose();
+                        console.log("dispose");
+                    }
                 }
             })
 
             current.removeChild(renderer.domElement);
 
             window.removeEventListener("resize", onWindowResize, false);
-            window.removeEventListener('mousemove', function() {
+            window.removeEventListener('mousemove', function () {
                 lastTime = new Date().getTime();
             });
 
             renderer.domElement.removeEventListener('dblclick', zoomCam);
 
             /*if(renderer){
+
                 renderer.forceContextLoss();
                 renderer.dispose();
                 //renderer=undefined;
@@ -331,18 +348,32 @@ const ViewerPage = () => {
                 </div>
             </div>
             <div id="scene-container">
-                <div ref={mountRef} id="canva"></div>
-                <button onClick={prevButton} id="previous">
-                    <FontAwesomeIcon icon={faChevronLeft} size="5x" color='gray'/>
+                <div id="titleArea">
+                    <span id="title">{products[productSelectedId].name}</span>
+                </div>
+
+                <button id="back">
+                    <FontAwesomeIcon icon={faBars} size="5x" color='#5d7a76' />
                 </button>
-                <button onClick={nextButton} id="next">
-                    <FontAwesomeIcon icon={faChevronRight} size="5x" color='gray'/>
-                </button>              
+                <div ref={mountRef} id="canva"></div>
+                <button onClick={prevButton} id="previous" className='btnChangePage'>
+                    <FontAwesomeIcon icon={faChevronLeft} size="5x" color='#5d7a76' />
+                </button>
+                <button onClick={nextButton} id="next" className='btnChangePage'>
+                    <FontAwesomeIcon icon={faChevronRight} size="5x" color='#5d7a76' />
+                </button>
+                <div id="description1" className="descriptionArea"  hidden={description === 0 ? false : true}>
+                    <span className="description">{products[productSelectedId].describe[0]}</span>
+                </div>
+                <div  id="description2" className="descriptionArea" hidden={description === 1 ? false : true}>
+                    <span className="description" >{products[productSelectedId].describe[1]}</span>
+                </div>
+                <div  id="description3" className="descriptionArea" hidden={description === 2 ? false : true}> 
+                    <span className="description" >{products[productSelectedId].describe[2]}</span>
+                </div>
+
             </div>
 
-            <div id="info">
-                <h3>{products[productSelectedId].name}</h3>
-            </div>
         </div>
     );
 }
