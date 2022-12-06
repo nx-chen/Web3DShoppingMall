@@ -73,6 +73,7 @@ const ViewerPage = () => {
 
         var scene = new THREE.Scene();
 
+
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
         var renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -82,10 +83,15 @@ const ViewerPage = () => {
         renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
+        
         current.appendChild(renderer.domElement);
 
         const controls = new OrbitControls(camera, renderer.domElement);
+
+        controls.maxDistance = 10;
+
+        controls.listenToKeyEvents(renderer.domElement)
+
 
         const environment = new RoomEnvironment();
         const pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -141,8 +147,12 @@ const ViewerPage = () => {
 
         //scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
-        function checkRotation() {
-            var rotSpeed = .02
+
+        // Rotation
+        function checkRotation(){
+
+            var rotSpeed = .01
+            
             var x = camera.position.x,
                 y = camera.position.y,
                 z = camera.position.z;
@@ -152,10 +162,102 @@ const ViewerPage = () => {
 
         }
 
+        // Zoom on double click
+
+        const mouse = new THREE.Vector2();
+
+        function zoomCam(event)
+        {
+            event.preventDefault();
+            const canvas = renderer.domElement;
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+
+            const dir = new THREE.Vector3((event.clientX / w) * 2.0 - 1.0, -((event.clientY / h) * 2.0 - 1.0, -1));
+            dir.unproject(camera);
+
+            mouse.set(
+                (event.clientX / w) * 2.0 - 1.0,
+                -((event.clientY / h) * 2.0 - 1.0));
+
+            var raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+
+            var intersects = raycaster.intersectObjects(scene.children, true);
+            console.log("intersects: " + intersects)
+            if (intersects && intersects.length > 0)
+            {
+                controls.target.set(intersects[0].point.x,intersects[0].point.y,intersects[0].point.z);
+                controls.maxDistance = 2;
+                controls.update();
+                controls.maxDistance = 10;
+            }
+        }
+
+        renderer.domElement.addEventListener('dblclick', zoomCam);
+    
+
+        // annotation
+        const canvas = document.getElementById('number');
+        const ctx = canvas.getContext('2d');
+        const x = 32;
+        const y = 32;
+        const radius = 30;
+        const startAngle = 0;
+        const endAngle = Math.PI * 2;
+
+        ctx.fillStyle = 'rgb(0, 0, 0)';
+        ctx.beginPath();
+        ctx.arc(x, y, radius, startAngle, endAngle);
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgb(255, 255, 255)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, startAngle, endAngle);
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgb(255, 255, 255)';
+        ctx.font = '32px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('1', x, y);
+
+        const numberTexture = new THREE.CanvasTexture(document.getElementById("number"));
+        const spriteMaterial = new THREE.SpriteMaterial({
+            map: numberTexture,
+            alphaTest: 0,
+            transparent: true,
+            depthTest: false,
+            depthWrite: false });
+
+        const sprite = new THREE.Sprite(spriteMaterial);
+        sprite.position.set(250, 250, 250);
+        sprite.scale.set(0, 0, 0);
+
+        const annotation = document.getElementById("annotation");
+
+        function updateScreenPosition() {
+            const vector = new THREE.Vector3(0.5, 0.2, 0.2);
+            const canvas = renderer.domElement;
+        
+            vector.project(camera);
+        
+            vector.x = Math.round((0.5 + vector.x / 2) * (canvas.width / window.devicePixelRatio));
+            vector.y = Math.round((0.5 - vector.y / 2) * (canvas.height / window.devicePixelRatio));
+        
+            annotation.style.top = `${vector.y}px`;
+            annotation.style.left = `${vector.x}px`;
+            annotation.style.opacity = 1;
+        }
+
+
         var animate = function () {
-            requestAnimationFrame(animate);
-            testTime();
-            renderer.render(scene, camera);
+            requestAnimationFrame( animate );
+            testTime();          
+            renderer.render( scene, camera );
+            updateScreenPosition();
+
         }
 
         let onWindowResize = function () {
@@ -169,6 +271,7 @@ const ViewerPage = () => {
         animate();
 
         window.addEventListener('mousemove', function () {
+
             lastTime = new Date().getTime();
             console.log(camera.position);
 
@@ -213,25 +316,37 @@ else if (camera.position.x <=-1 &&  camera.position.x >= -6)
                 }
             })
 
+            current.removeChild(renderer.domElement);
+
             window.removeEventListener("resize", onWindowResize, false);
             window.removeEventListener('mousemove', function () {
                 lastTime = new Date().getTime();
             });
 
-            if (renderer) {
+            renderer.domElement.removeEventListener('dblclick', zoomCam);
+
+            /*if(renderer){
+
                 renderer.forceContextLoss();
                 renderer.dispose();
                 //renderer=undefined;
                 console.log("Renderer: " + renderer);
-            }
-            current.removeChild(renderer.domElement);
+            }*/         
         };
 
     }, [productSelectedId]);
 
     return (
         <div className='viewerPage'>
-
+            <div id="annotation-div">
+                <canvas id="number" width="64" height="64"></canvas>
+                <div id="annotation">
+                    <div>
+                        <p><strong>Hand Facts</strong></p>
+                        <p>Statistically, The average number of hands per person worldwide is less than 2.</p>
+                    </div>
+                </div>
+            </div>
             <div id="scene-container">
                 <div id="titleArea">
                     <span id="title">{products[productSelectedId].name}</span>
