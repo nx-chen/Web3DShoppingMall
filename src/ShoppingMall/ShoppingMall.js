@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ProductItemCard from './ProductItemCard';
 import './style/ShoppingMall.css';
 import ShowMore from 'react-show-more-list';

@@ -160,7 +160,6 @@ const ViewerPage = () => {
             var rotSpeed = .01
 
             var x = camera.position.x,
-                y = camera.position.y,
                 z = camera.position.z;
             camera.position.x = x * Math.cos(rotSpeed) - z * Math.sin(rotSpeed);
             camera.position.z = z * Math.cos(rotSpeed) + x * Math.sin(rotSpeed);
