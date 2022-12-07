@@ -54,7 +54,7 @@ const ShoppingMall = () => {
     return (
         <div id="ShoppingMall">
             <div id="list-title">
-                <p>Our Products</p>
+                <p>Old House's Style</p>
             </div>
 
             <ShowMore

@@ -1,10 +1,10 @@
 #product-item {
-  background-color: white;
+  background-color: #bfe3dd;
   border-radius: 15px;
   margin-bottom: 30px;
   height: 330px;
   width: 400px;
-  box-shadow: 5px 5px 10px rgb(204, 204, 204);
+  box-shadow: 5px 5px 10px rgb(151, 151, 156);
   padding-bottom: 10px;
   transition: visibility 0s linear 0.33s, opacity 0.33s linear;
   
@@ -18,7 +18,7 @@
 
 #product-item:hover {
   transform: translate(0px, 3px);
-  box-shadow: 2px 2px 5px rgb(204, 204, 204), 0 0 5px rgb(245, 247, 235);
+  box-shadow: 2px 2px 5px rgb(204, 204, 204), 0 0 5px rgb(200, 200, 197);
 
 }
 
@@ -26,7 +26,7 @@
 #product-item p{
  
  font-weight: 500;
- color:rgb(110, 110, 109);
+ color: #4b6965;
 }
 
 #product-item p span{

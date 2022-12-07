@@ -22,28 +22,28 @@ const ViewerPage = () => {
 
     const products = [
         //armoires
-        { id: 0, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb", describe: ["The best dresser you can find", "Made of wood", "Color vivid"] },
-        { id: 1, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb", describe: ["Dresser antique", "Made of wood", "Color vivid"] },
-        { id: 2, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb", describe: ["The best wardrobe you can find", "Made of wood", "Color vivid"] },
-        { id: 3, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb", describe: ["Little bedside table for your bedroom", "Made of wood", "Color vivid"] },
+        { id: 0, name: "Antique dresser blue", assetPath: "Assets/Meubles/antique_dresser_blue.glb", describe: ["The best dresser you can find", "Made of wood", "Fancy", "Old piece of furniture nice to have"] },
+        { id: 1, name: "Antique dresser green", assetPath: "Assets/Meubles/antique_green_v3.glb", describe: ["Dresser antique", "Made of wood", "Cool", "Old piece of furniture nice to have"] },
+        { id: 2, name: "Antique wardrobe", assetPath: "Assets/Meubles/antique_wardrobe.glb", describe: ["The best wardrobe you can find", "Made of wood", "Charming", "Old piece of furniture nice to have"] },
+        { id: 3, name: "Bedside table", assetPath: "Assets/Meubles/bedside_table_2.glb", describe: ["Little bedside table for your bedroom", "Made of wood", "Cute", "Old piece of furniture nice to have"] },
         //tables
-        { id: 4, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb", describe: ["The best desk antique you can find", "Made of wood", "Color vivid"] },
-        { id: 5, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb", describe: ["Table anitique", "Made of wood", "Color vivid"] },
-        { id: 6, name: "Table", assetPath: "Assets/Meubles/table.glb", describe: ["Lovely table", "Made of wood", "Color vivid"] },
-        { id: 7, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb", describe: ["The best table for your dining room", "Made of wood", "Color vivid"] },
-        { id: 8, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb", describe: ["The best desk you can find", "Made of wood", "Color vivid"] },
-        { id: 9, name: "Small table", assetPath: "Assets/Meubles/small_table.glb", describe: ["Little table suitable for you", "Made of wood", "Color vivid"] },
+        { id: 4, name: "Antique desk", assetPath: "Assets/Meubles/antique_desk.glb", describe: ["The best desk antique you can find", "Made of wood", "Beautiful", "Old piece of furniture nice to have"] },
+        { id: 5, name: "Old Table", assetPath: "Assets/Meubles/old_table.glb", describe: ["Table anitique", "Made of wood", "Gracious", "Old piece of furniture nice to have"] },
+        { id: 6, name: "Table", assetPath: "Assets/Meubles/table.glb", describe: ["Lovely table", "Made of wood", "Soft", "Old piece of furniture nice to have"] },
+        { id: 7, name: "Wooden center table", assetPath: "Assets/Meubles/wooden_center_table.glb", describe: ["The best table for your dining room", "Made of wood", "Smooth", "Old piece of furniture nice to have"] },
+        { id: 8, name: "Victorian desk", assetPath: "Assets/Meubles/victorian_desk_with_props.glb", describe: ["The best desk you can find", "Made of wood", "Stylish", "Old piece of furniture nice to have"] },
+        { id: 9, name: "Small table", assetPath: "Assets/Meubles/small_table.glb", describe: ["Little table suitable for you", "Made of wood", "Cozy", "Old piece of furniture nice to have"] },
         //sofas chaises
-        { id: 10, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb", describe: ["The best sofa you can find", "Comfortable", "Color vivid"] },
-        { id: 11, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb", describe: ["The best Chair for your home", "Made of wood", "Color vivid"] },
-        { id: 12, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb", describe: ["The best Chair for your dining room", "Made of wood", "Color vivid"] },
-        { id: 13, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb", describe: ["The best Chair for your dining room", "Made of wood", "Color vivid"] },
-        { id: 14, name: "Couch", assetPath: "Assets/Meubles/couch.glb", describe: ["The best couch you can find", "Comfortable", "Made for whole family"] },
+        { id: 10, name: "Chesterfield sofa", assetPath: "Assets/Meubles/chesterfield-sofa.glb", describe: ["The best sofa you can find", "Comfortable", "Relaxing", "Old piece of furniture nice to have"] },
+        { id: 11, name: "Mercury chair", assetPath: "Assets/Meubles/mercury_chair_regency_period.glb", describe: ["The best Chair for your home", "Made of wood", "Great", "Old piece of furniture nice to have"] },
+        { id: 12, name: "Grand classic Edwardian Dining Armchair", assetPath: "Assets/Meubles/edwardian_chair_v3.glb", describe: ["The best Chair for your dining room", "Made of wood", "Attractive", "Old piece of furniture nice to have"] },
+        { id: 13, name: "Victorian Chair", assetPath: "Assets/Meubles/victorian_chair_v2.glb", describe: ["The best Chair for your dining room", "Made of wood", "Comfy"," Old piece of furniture nice to have"] },
+        { id: 14, name: "Couch", assetPath: "Assets/Meubles/couch.glb", describe: ["The best couch you can find", "Comfortable", "Made for whole family", "Old piece of furniture nice to have"] },
         //autres
-        { id: 15, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb", describe: ["The gramophone antique", "Play your music", "Color vivid"] },
-        { id: 16, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb", describe: ["The best gramophone you can find", "Play your music", "Color vivid"] },
-        { id: 17, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb", describe: ["The best rocking horse for your kids", "Made of wood", "Color vivid"] },
-        { id: 18, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb", describe: ["The best bird cage you can find", "Beautiful and classic", "Color vivid"] },
+        { id: 15, name: "Old gramophone", assetPath: "Assets/Meubles/old_gramophone.glb", describe: ["The gramophone antique", "Play your music", "Sophisticated", "Old music player nice to have"] },
+        { id: 16, name: "Vintage gramophone", assetPath: "Assets/Meubles/vintage_gramophone.glb", describe: ["The best gramophone you can find", "Play your music", "Magnificient", "Old music player nice to have"] },
+        { id: 17, name: "Rocking horse with wheels", assetPath: "Assets/Meubles/rocking_horse_with_wheels.glb", describe: ["The best rocking horse for your kids", "Made of wood", "Wonderful", "Old piece of furniture nice to have"] },
+        { id: 18, name: "Standing bird cage", assetPath: "Assets/Meubles/standing_bird_cage.glb", describe: ["The best bird cage you can find", "Beautiful and classic", "Gorgeous", " Nice furniture to have"] },
     ];
     const [productSelectedId, setProductSelectedId] = useState(state.id);
     const [description, setDescription] = useState(0);
@@ -65,6 +65,7 @@ const ViewerPage = () => {
     const backToList = () => {
         navigate('/');
     }
+
 
     let lastTime = new Date().getTime();
 
@@ -281,7 +282,6 @@ const ViewerPage = () => {
         window.addEventListener('mousemove', function () {
 
             lastTime = new Date().getTime();
-            console.log(camera.position);
 
             if (camera.position.x <= 8 && camera.position.z >= 2 && camera.position.x >= -1 && camera.position.z <= 9) {
                 setDescription(0);
@@ -317,7 +317,6 @@ const ViewerPage = () => {
                     const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
                     for (const mat of materials) {
                         mat.dispose();
-                        console.log("dispose");
                     }
                 }
             })
@@ -335,8 +334,6 @@ const ViewerPage = () => {
 
                 renderer.forceContextLoss();
                 //renderer.dispose();
-                //renderer=undefined;
-                console.log("Renderer: " + renderer);
             }
         };
 
@@ -345,11 +342,12 @@ const ViewerPage = () => {
     return (
         <div className='viewerPage'>
             <div id="annotation-div">
-                <canvas id="number" width="64" height="64"></canvas>
+                <canvas id="number" width="32" height="32">
+                </canvas>
                 <div id="annotation">
                     <div>
-                        <p><strong>Hand Facts</strong></p>
-                        <p>Statistically, The average number of hands per person worldwide is less than 2.</p>
+                        <p><strong>Information</strong></p>
+                        <p>{products[productSelectedId].describe[3]}</p>
                     </div>
                 </div>
             </div>
@@ -379,7 +377,6 @@ const ViewerPage = () => {
                 </div>
 
             </div>
-
         </div>
     );
 }

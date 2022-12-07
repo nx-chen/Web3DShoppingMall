@@ -30,14 +30,12 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
         }
 
         window.addEventListener("resize", onWindowResize, false);
-        return () => {
-            console.log("=======");
-            mountRef.current?.removeChild(renderer.domElement);
 
+        return () => {
+            mountRef.current?.removeChild(renderer.domElement);
+          
         }
     }, []);
-
-
 
 
     const init = () => {
@@ -60,7 +58,7 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
         ambientLight.castShadow = true;
         scene.add(ambientLight);
 
-        scene.background = new THREE.Color(0xffffff);
+        scene.background = new THREE.Color(0xbfe3dd); /*here*/
         scene.environment = pmremGenerator.fromScene(environment).texture;
 
         setMeuble(product.assetPath);
@@ -125,35 +123,31 @@ const DisplayArea = ({ product, canvasId, sourceId }) => {
             const imageHeight = document.getElementById(sourceId).children[0].height;
             const canvasHeight = document.getElementById(canvasId).height;
 
-            new Promise((resolve, reject) => {
-                ctx.drawImage(image, 290, 0, imageWidth, imageHeight, 0, 0, canvasHeight * (imageWidth / imageHeight), canvasHeight);
-                resolve(destroy())
-            });
-
+            ctx.drawImage(image, 290, 0, imageWidth, imageHeight, 0, 0, canvasHeight * (imageWidth / imageHeight), canvasHeight);
+            destroy();
+            image.parentElement.removeChild(document.getElementById(sourceId).children[0]);
+            console.log("canvas:",document.getElementById(sourceId));
         }
     }, [isLoading])
 
 
     const destroy = () => {
-        console.log("destroy");
         scene.traverse((child) => {
             const mesh = child;
             if (mesh.isMesh) {
-                mesh.geometry.dispose();
-                const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-                for (const mat of materials) {
-                    mat.dispose();
-                }
+              mesh.geometry.dispose();
+              const materials = Array.isArray(mesh.material) ? mesh.material : [ mesh.material ];
+              for (const mat of materials) {
+                mat.dispose();
+                console.log("dispose");
+              }
             }
         })
-        scene.clear();
+
         renderer.forceContextLoss();
         renderer.dispose();
-
         renderer.clear();
-
         renderer.domElement = null;
-        renderer = null;
 
     }
 

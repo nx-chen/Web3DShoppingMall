@@ -6,7 +6,8 @@
   top: 0;
   display: inline-block;
   width: 100%;
- 
+  background-color: #bfe3dd;
+  user-select: none;
 }
 
 
@@ -15,12 +16,13 @@
   flex-direction: column;
   margin-top: 2%;
   margin-bottom: 20px;
+  background-color: #bfe3dd;
 }
 
 #list-title {
   font-weight: 500;
   font-size: 70px;
-  color:rgb(110, 110, 109);
+  color: #5d7a76;
   font-family: lobsterTwo-Bold, serif;
 }
 
@@ -36,12 +38,12 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(221, 220, 220);
+  background: #5d7a76;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(214, 208, 208);
+  background: #5d7a76;
 }
 
 
@@ -57,7 +59,7 @@
 }
 
 #btnShowMore:hover {
-  color: rgb(63, 186, 61);
+  color: #4b6965;
 
 }
 
