@@ -5,12 +5,12 @@ Projet de la majeure MTI, parcours Frontend, cours Web3D promo 2023.
 Ce projet à été fait avec ReactJs, Threejs.
 
 # Authors
-Maridiyath BACHIROU (login: maridiyath-folake-odeofe.bachirou)
+Maridiyath BACHIROU (login: maridiyath-folake-odeofe.bachirou) <br/>
 Ningxi CHEN (login: ningxi.chen)
 
 ## Installation
 
-Après avoir dézippé le projet, installez le projet avec :
+Après avoir dézippé le projet, vous devez d'abord installer les dépendances avec :
 ```bash
 yarn install
 ```
@@ -21,6 +21,8 @@ Pour lancer le serveur de développement faites:
 ```bash
 yarn start
 ```
+Normalement cette commande lancera directement votre navigateur à l'adresse ```http://localhost:3000```. <br/>
+Si ce n'est pas le cas lancez directement ```http://localhost:3000``` dans votre navigateur pour voir le projet.
 
 ## Features disponibles dans le projet
 
