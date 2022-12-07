@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Old House's Style
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projet de la majeure MTI, parcours Frontend, cours Web3D promo 2023.
 
-## Available Scripts
+Ce projet à été fait avec ReactJs, Threejs.
 
-In the project directory, you can run:
+# Authors
+Maridiyath BACHIROU (login: maridiyath-folake-odeofe.bachirou)
+Ningxi CHEN (login: ningxi.chen)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Après avoir dézippé le projet, installez le projet avec :
+```bash
+yarn install
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Lancement
 
-### `npm test`
+Pour lancer le serveur de développement faites:
+```bash
+yarn start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features disponibles dans le projet
 
-### `npm run build`
+Dans ce projet vous trouverez quelques features telles que:
+* Une page d’accueil avec une liste d'articles représentant des vieux meubles à revendre
+    * En bas de cette liste vous trouverez un bouton ```Show More``` pour charger d’autres article.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Une page de détails des articles sur laquelle il y a :
+    * L’article en 3D autour duquel vous pouvez naviguer
+    * Vous pouvez faire un double click sur l’article pour rapprocher la caméra vers le point où vous avez cliquez
+    * Après 30 sec sans bouger votre souris la caméra se met à tourner autour de l’article histoire de mieux vous la présenter
+    * Une annotation vous donnant une information sur l’article
+    * Des notes qui apparaissent quand vous tourner l’article vous donnant des appréciations sur ce dernier
